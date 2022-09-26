@@ -1,21 +1,21 @@
 // Importing function factory
-import * as apiVar from "../../constant/variables.mjs";
-import { fetchApi } from "../../constant/fetch.mjs";
 import { Card } from "../../utils/classes/cardClass.mjs";
 import { getUserPosts } from "../posts/userFilteredPosts.mjs";
-import { message } from "../../constant/message.mjs";
-
-// Re-declaring variables from import
-const url = apiVar.baseURL;
-const endpointPosts = apiVar.getPosts;
+import { fetchData } from "./fetchProfileData.mjs"; 
 
 // Creating function to display user profile
 export async function displayProfile() {
 
 const token = localStorage.getItem("token")
+const name = localStorage.getItem("username")
 
-const authUser = await fetchApi(url + endpointPosts, "GET", token, null)
+const authUser = await fetchData(token, name);
+
 getUserPosts(authUser);
+
+// const card = new Card("div", "profile-card card", "profile-card", `${title}`, null,`${body}`, null, null, null)
+
+
 }
 
 

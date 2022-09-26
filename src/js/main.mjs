@@ -5,9 +5,6 @@ import { displayProfile } from "./user/profile/profile.mjs";
 import { display404Page } from "./constant/404page.mjs";
 import { checkUserStatus } from "./constant/statcheck.mjs";
 
-// Importing layout
-import { generateFooter } from "./constant/layout/footer.js";
-
 // // Creating variables to use in the if statement under
 const logOutButton = document.querySelector("#logout");
 
@@ -23,20 +20,17 @@ async function router() {
   // Executing sign in function if the location is based on the log in location
   case "index":
    user.formEvent();
-   checkUserStatus(localStorage.getItem("token"));
-   generateFooter();
+   checkUserStatus(localStorage.getItem("token"))
    break;
 
-  // Executing the the function for the profile page layout
+   // Executing the the function for the profile page layout
   case "profile":
    displayProfile();
-   generateFooter();
    break;
 
   case "404":
   default:
    display404Page();
-   generateFooter();
  }
 }
-router();
+router()

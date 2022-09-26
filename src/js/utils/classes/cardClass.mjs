@@ -7,8 +7,8 @@ export class Card {
  }
 }
 
-export class LoopingCard {
- constructor(elementName, attributes = {}, template = "") {
+class LoopingCard {
+ constructor(elementName, attributes = {}, template = {}) {
   this.element = document.createElement(elementName);
   this.addAttributes(attributes);
   this.addTemplate(template);
@@ -20,6 +20,6 @@ export class LoopingCard {
   });
  }
  addTemplate(template) {
-  this.element.innerHTML = `${template}`;
+  this.element.innerHTML = `${template.greeting} ${template.name}`;
  }
 }

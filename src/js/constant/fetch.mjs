@@ -25,7 +25,7 @@ export async function fetchApi(url, method, token, data) {
    }
 
   if (token) {
-   fetchOptions.headers["Authorization"] = `Bearer ${token}`;
+   fetchOptions.headers["Authorization"] = token;
   }
 
   const request = await fetch(url, fetchOptions);
@@ -41,11 +41,8 @@ export async function fetchApi(url, method, token, data) {
     localStorage.setItem("email", i.email);
     localStorage.setItem("avatar", i.avatar);
   }
-  // console.log("Response", response);
-  // console.log("Options", fetchOptions);
-
-  return response;
-
+  console.log("Response", response);
+  console.log("Options", fetchOptions);
  } catch (error) {
   console.log("Oh no!!", error.message);
  }
