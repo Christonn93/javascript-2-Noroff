@@ -19,33 +19,33 @@ const fetchUrl = url + endpointPosts + `${paramId}`;
 
 // Function to retrieve user posts
 export async function postItemByID() {
- try {
-  const request = await fetchApi(fetchUrl, "GET", token, null);
-  const feedContainer = document.querySelector("#post-feed");
+  try {
+    const request = await fetchApi(fetchUrl, "GET", token, null);
+    const feedContainer = document.querySelector("#post-feed");
 
-  const { id, title, created, body, author, updated, tag, media, avatar, comments, reactions, _count } = request;
+    const { id, title, created, body, author, updated, tag, media, avatar, comments, reactions, _count } = request;
 
-  // Time formatting
-  const formattedCreated = changeTimeFormat(created);
-  const formattedUpdated = changeTimeFormat(updated);
+    // Time formatting
+    const formattedCreated = changeTimeFormat(created);
+    const formattedUpdated = changeTimeFormat(updated);
 
-  // Constants for DOM manipulations
-  let userAvatar = "";
-  let postTags = "";
-  let postImage = "";
-  let commentsHtml = "";
-  let postSettings = "";
+    // Constants for DOM manipulations
+    let userAvatar = "";
+    let postTags = "";
+    let postImage = "";
+    let commentsHtml = "";
+    let postSettings = "";
 
-  if (media) {
-   postImage = `<a href="#openImageModal"><img src="${media}" class="small-image" alt="" loading="lazy"/></a>`;
-  }
+    if (media) {
+      postImage = `<a href="#openImageModal"><img src="${media}" class="small-image" alt="" loading="lazy"/></a>`;
+    }
 
-  if (comments) {
-   const commentsTimeCreated = changeTimeFormat(comments.map((e) => e.created));
+    if (comments) {
+      const commentsTimeCreated = changeTimeFormat(comments.map((e) => e.created));
 
-   commentsHtml = comments
-    .map(
-     (e) => `
+      commentsHtml = comments
+        .map(
+          (e) => `
       <div class="container" id="commentId-${e.id}">
         <div class="card-body">
             <p class="card-text">${e.body}</p>
@@ -57,17 +57,17 @@ export async function postItemByID() {
             </div>
       </div> 
     `
-    )
-    .join("");
-  }
+        )
+        .join("");
+    }
 
-  if (author.avatar) {
-   userAvatar = `<img src="${author.avatar}" class="img-thumbnail user-avatar-small" alt="" loading="lazy" />`;
-  }
+    if (author.avatar) {
+      userAvatar = `<img src="${author.avatar}" class="img-thumbnail user-avatar-small" alt="" loading="lazy" />`;
+    }
 
-  const currentUser = localStorage.getItem("username");
-  if (currentUser === author.name) {
-   postSettings = `<span class="settings d-flex justify-content-end">
+    const currentUser = localStorage.getItem("username");
+    if (currentUser === author.name) {
+      postSettings = `<span class="settings d-flex justify-content-end">
     <div class="dropdown">
     <a class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gear"></i></a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -75,16 +75,16 @@ export async function postItemByID() {
     <li><button class="dropdown-item" id="deletePost-id-${id}">Delete</button></li>
     </ul>
   </div>`;
-  }
+    }
 
-  const card = new LoopingCard(
-   "div",
-   {
-    id: `post-id-${id}`,
-    class: "card container-fluid d-flex justify-content-center p-0 m-0",
-    "data-id": "postItem",
-   },
-   `<div class="card-header">
+    const card = new LoopingCard(
+      "div",
+      {
+        id: `post-id-${id}`,
+        class: "card container-fluid d-flex justify-content-center p-0 m-0",
+        "data-id": "postItem",
+      },
+      `<div class="card-header">
       <div class="d-flex flex-fill">
        <div class="d-flex flex-fill gap-2 align-items-center">
         ${userAvatar}
@@ -121,10 +121,10 @@ export async function postItemByID() {
       </form>
       ${commentsHtml}
      </div>`
-  );
+    );
 
-  feedContainer.append(card);
- } catch (err) {
-  console.log("There was a problem retrieving the user posts", err);
- }
+    feedContainer.append(card);
+  } catch (err) {
+    console.log("There was a problem retrieving the user posts", err);
+  }
 }

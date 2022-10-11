@@ -19,26 +19,26 @@ const endpointProfile = apiVar.profile;
  * @param {string} token The token is retrieved from localStorage and is needed to execute the function. Without this the script will not execute
  */
 export async function fetchData(token, name) {
- try {
-  const request = await fetch(url + endpointProfile + `${name}`, {
-   method: "get",
-   headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-   },
-   body: JSON.stringify(),
-  });
+  try {
+    const request = await fetch(url + endpointProfile + `${name}`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(),
+    });
 
-  const response = await request.json();
+    const response = await request.json();
 
-  if (!response.ok) {
-   console.log("You are logged in", response);
-  } else {
-    window.location.href = "./";
-    console.log("Sorry, you was not registered as a valid user. Please create a account")
-    message("invalid")
+    if (!response.ok) {
+      console.log("You are logged in", response);
+    } else {
+      window.location.href = "./";
+      console.log("Sorry, you was not registered as a valid user. Please create a account")
+      message("invalid")
+    }
+  } catch (error) {
+    console.log(error);
   }
- } catch (error) {
-  console.log(error);
- }
 }

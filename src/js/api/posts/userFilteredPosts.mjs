@@ -17,40 +17,40 @@ const fetchUrl = url + endpointPosts;
 
 // Function to retrieve user posts
 export async function getUserPosts() {
- try {
-  const request = await fetchApi(fetchUrl, "GET", token, null);
+  try {
+    const request = await fetchApi(fetchUrl, "GET", token, null);
 
-  if (request) {
-   const data = request;
-   const dataFilter = data.filter(function (resp) {
-    return resp.author.email === localEmail;
-   });
+    if (request) {
+      const data = request;
+      const dataFilter = data.filter(function (resp) {
+        return resp.author.email === localEmail;
+      });
 
-   dataFilter.forEach((e) => {
-    const feedContainer = document.querySelector("#post-feed");
+      dataFilter.forEach((e) => {
+        const feedContainer = document.querySelector("#post-feed");
 
-    const { id, title, created, body, author, updated, tag, media, comments, reactions, _count } = e;
+        const { id, title, created, body, author, updated, tag, media, comments, reactions, _count } = e;
 
-    const formattedCreated = changeTimeFormat(created);
-    const formattedUpdated = changeTimeFormat(updated);
+        const formattedCreated = changeTimeFormat(created);
+        const formattedUpdated = changeTimeFormat(updated);
 
-    // Constants for DOM manipulations
-    let userAvatar = "";
-    let postTags = "";
-    let postImage = "";
-    let commentsHtml = "";
-    let postSettings = "";
+        // Constants for DOM manipulations
+        let userAvatar = "";
+        let postTags = "";
+        let postImage = "";
+        let commentsHtml = "";
+        let postSettings = "";
 
-    if (media) {
-     postImage = `<a href="#openImageModal"><img src="${media}" class="small-image" alt="" loading="lazy"/></a>`;
-    }
+        if (media) {
+          postImage = `<a href="#openImageModal"><img src="${media}" class="small-image" alt="" loading="lazy"/></a>`;
+        }
 
-    if (comments) {
-     const commentsTimeCreated = changeTimeFormat(comments.map((e) => e.created));
+        if (comments) {
+          const commentsTimeCreated = changeTimeFormat(comments.map((e) => e.created));
 
-     commentsHtml = comments
-      .map(
-       (e) => `
+          commentsHtml = comments
+            .map(
+              (e) => `
         <div class="container" id="commentId-${e.id}">
           <div class="card-body">
               <p class="card-text">${e.body}</p>
@@ -62,16 +62,16 @@ export async function getUserPosts() {
               </div>
         </div> 
       `
-      )
-      .join("");
-    }
+            )
+            .join("");
+        }
 
-    if (author.avatar) {
-     userAvatar = `<img src="${author.avatar}" class="img-thumbnail user-avatar-small" alt="" loading="lazy" />`;
-    }
+        if (author.avatar) {
+          userAvatar = `<img src="${author.avatar}" class="img-thumbnail user-avatar-small" alt="" loading="lazy" />`;
+        }
 
-    if (userName === author.name) {
-     postSettings = `<span class="settings d-flex justify-content-end">
+        if (userName === author.name) {
+          postSettings = `<span class="settings d-flex justify-content-end">
       <div class="dropdown">
       <a class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gear"></i></a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -83,17 +83,17 @@ export async function getUserPosts() {
       </li>
       </ul>
     </div>`;
-    }
+        }
 
 
-    const card = new LoopingCard(
-     "div",
-     {
-      id: `post-id-${id}`,
-      class: "card container-fluid d-flex justify-content-center p-0 m-0 post_feed_content",
-      "data-id": "postItem",
-     },
-     `<div class="card-header">
+        const card = new LoopingCard(
+          "div",
+          {
+            id: `post-id-${id}`,
+            class: "card container-fluid d-flex justify-content-center p-0 m-0 post_feed_content",
+            "data-id": "postItem",
+          },
+          `<div class="card-header">
            <div class="d-flex flex-fill">
            <div class="d-flex flex-fill gap-2 align-items-center">
             ${userAvatar}
@@ -133,23 +133,23 @@ export async function getUserPosts() {
         </div>
        </div>
           `
-    );
+        );
 
-    // Removing loader
-    const loader = document.querySelector(".loader");
-    loader.style = "display: none;";
+        // Removing loader
+        const loader = document.querySelector(".loader");
+        loader.style = "display: none;";
 
-    feedContainer.append(card);
+        feedContainer.append(card);
 
-    deletePostListener(id)
-    updatePostListener(id)
-   });
+        deletePostListener(id)
+        updatePostListener(id)
+      });
 
 
-  //  console.log("This is the filtered response", dataFilter);
-   //  console.log("This is the unfiltered response", response);
+      //  console.log("This is the filtered response", dataFilter);
+      //  console.log("This is the unfiltered response", response);
+    }
+  } catch (err) {
+    console.log("There was a problem retrieving the user posts", err);
   }
- } catch (err) {
-  console.log("There was a problem retrieving the user posts", err);
- }
 }

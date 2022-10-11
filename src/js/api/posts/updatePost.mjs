@@ -10,32 +10,32 @@ const postDetails = apiVar.getPostsById + id;
 const updatePostUrl = apiVar.deletePost + id;
 
 export function updatePostListener(id) {
- document.querySelector(`button[id=updatePost-${id}]`).addEventListener("click", (e) => {
-  displayAlert(id);
- });
+  document.querySelector(`button[id=updatePost-${id}]`).addEventListener("click", (e) => {
+    displayAlert(id);
+  });
 }
 
 async function displayAlert(postId) {
- const main = document.querySelector("#confirm-action");
- const displayContent = document.createElement("div");
+  const main = document.querySelector("#confirm-action");
+  const displayContent = document.createElement("div");
 
- try {
-  let request = await fetchApi(url + postDetails + postId, "GET", localStorage.getItem("token"), null);
-  const { id, title, body, tag, media } = request;
+  try {
+    let request = await fetchApi(url + postDetails + postId, "GET", localStorage.getItem("token"), null);
+    const { id, title, body, tag, media } = request;
 
-  if (request) {
-   let requestBody = {};
-   request = await fetchApi(url + postDetails + id, "GET", localStorage.getItem("token"), requestBody);
-  }
+    if (request) {
+      let requestBody = {};
+      request = await fetchApi(url + postDetails + id, "GET", localStorage.getItem("token"), requestBody);
+    }
 
-  const response = await request;
+    const response = await request;
 
-  let requestBody = response;
+    let requestBody = response;
 
-  //   console.log("Console logging requestBody", requestBody);
-  //   console.log("Console logging request", requestBody);
+    //   console.log("Console logging requestBody", requestBody);
+    //   console.log("Console logging request", requestBody);
 
-  displayContent.innerHTML = `
+    displayContent.innerHTML = `
   <form class="card bg-theme-bg-sec p-2 mb-5" id="updatePost">
   <div class="container">
    <div class="mb-3">
@@ -54,38 +54,38 @@ async function displayAlert(postId) {
   </div>
  </form>`;
 
-  main.append(displayContent);
-  formListener(id);
- } catch (error) {
-  console.log(error);
- }
+    main.append(displayContent);
+    formListener(id);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function formListener(id) {
- const form = document.querySelector("#updatePost");
+  const form = document.querySelector("#updatePost");
 
- if (form) {
-  form.addEventListener("submit", (event) => {
-   event.preventDefault();
+  if (form) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
 
-   const form = event.target;
-   const formData = new FormData(form);
-   const newData = Object.fromEntries(formData.entries());
+      const form = event.target;
+      const formData = new FormData(form);
+      const newData = Object.fromEntries(formData.entries());
 
-   // console.log("New form data", newData);
-   // send it to API
-   updatePost(id, newData);
-  });
- }
+      // console.log("New form data", newData);
+      // send it to API
+      updatePost(id, newData);
+    });
+  }
 }
 
 async function updatePost(id, content) {
- const callUrl = url + updatePostUrl + id;
- const userToken = localStorage.getItem("token");
- try {
-  const request = await fetchApi(callUrl, "PUT", userToken, content);
-  window.location.reload();
- } catch (error) {
-  message("Error");
- }
+  const callUrl = url + updatePostUrl + id;
+  const userToken = localStorage.getItem("token");
+  try {
+    const request = await fetchApi(callUrl, "PUT", userToken, content);
+    window.location.reload();
+  } catch (error) {
+    message("Error");
+  }
 }

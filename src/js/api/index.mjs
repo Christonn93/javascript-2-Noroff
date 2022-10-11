@@ -5,17 +5,17 @@ import { authUser } from "./auth/auth.mjs";
  *
  */
 export async function formEvent() {
- try {
-  const form = document.querySelector("form#login");
-  form.addEventListener("submit", (e) => {
-   e.preventDefault();
-   const form = e.target;
-   const email = form.email.value;
-   const password = form.pw.value;
+  try {
+    const form = document.querySelector("form#login");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const email = form.email.value;
+      const password = form.pw.value;
 
-   authUser(email, password);
-  });
- } catch (err) {
-  console.log(err);
- }
+      authUser(email, password);
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }

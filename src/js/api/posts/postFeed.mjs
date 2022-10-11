@@ -25,14 +25,14 @@ export let arrayPosts = [];
  * This Function is simply retrieving the post arrays
  */
 export async function postFeed() {
- try {
-  let request = await fetchApi(fetchUrl + params, "GET", token, null);
-  arrayPosts = request;
+  try {
+    let request = await fetchApi(fetchUrl + params, "GET", token, null);
+    arrayPosts = request;
 
-  createPostFeed(arrayPosts);
- } catch (err) {
-  console.log("There was a problem retrieving the user posts", err);
- }
+    createPostFeed(arrayPosts);
+  } catch (err) {
+    console.log("There was a problem retrieving the user posts", err);
+  }
 }
 
 /**
@@ -41,33 +41,34 @@ export async function postFeed() {
  * @param {*} postData This is needed to be able to populate the feed of posts.
  */
 function createPostFeed(postData) {
- arrayPosts = postData;
+  alert("This function is too large and does too many different things. It needs to be refactored.")
+  arrayPosts = postData;
 
- postData.forEach((data) => {
-  const feedContainer = document.querySelector("#post-feed");
+  postData.forEach((data) => {
+    const feedContainer = document.querySelector("#post-feed");
 
-  const { id, title, created, body, author, updated, tag, media, avatar, comments, reactions, _count } = data;
+    const { id, title, created, body, author, updated, tag, media, avatar, comments, reactions, _count } = data;
 
-  // Time formatting
-  const formattedCreated = changeTimeFormat(created);
-  const formattedUpdated = changeTimeFormat(updated);
+    // Time formatting
+    const formattedCreated = changeTimeFormat(created);
+    const formattedUpdated = changeTimeFormat(updated);
 
-  // Constants for DOM manipulations
-  let userAvatar = "";
-  let postImage = "";
-  let commentsHtml = "";
-  let postSettings = "";
+    // Constants for DOM manipulations
+    let userAvatar = "";
+    let postImage = "";
+    let commentsHtml = "";
+    let postSettings = "";
 
-  if (media) {
-   postImage = `<a href="#openImageModal"><img src="${media}" class="small-image" alt="" loading="lazy" /></a>;`;
-  }
+    if (media) {
+      postImage = `<a href="#openImageModal"><img src="${media}" class="small-image" alt="" loading="lazy" /></a>;`;
+    }
 
-  if (comments) {
-   const commentsTimeCreated = changeTimeFormat(comments.map((e) => e.created));
+    if (comments) {
+      const commentsTimeCreated = changeTimeFormat(comments.map((e) => e.created));
 
-   commentsHtml = comments
-    .map(
-     (e) => `
+      commentsHtml = comments
+        .map(
+          (e) => `
        <div class="d-flex flex-column p-2"> 
        <h5>Comments</h5>
        <div class="container card me-1 p-1" id="commentId-${e.id}">
@@ -82,17 +83,17 @@ function createPostFeed(postData) {
        </div> 
        </div>
      `
-    )
-    .join("");
-  }
+        )
+        .join("");
+    }
 
-  if (author.avatar) {
-   userAvatar = `<img src="${author.avatar}" class="img-thumbnail user-avatar-small" alt="" loading="lazy" />`;
-  }
+    if (author.avatar) {
+      userAvatar = `<img src="${author.avatar}" class="img-thumbnail user-avatar-small" alt="" loading="lazy" />`;
+    }
 
-  const currentUser = localStorage.getItem("username");
-  if (currentUser === author.name) {
-   postSettings = `<span class="settings d-flex justify-content-end">
+    const currentUser = localStorage.getItem("username");
+    if (currentUser === author.name) {
+      postSettings = `<span class="settings d-flex justify-content-end">
      <div class="dropdown">
      <a class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gear"></i></a>
      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -100,16 +101,16 @@ function createPostFeed(postData) {
        <li><button class="dropdown-item change-post" id="deletePost-id-${id}">Delete</button></li>
      </ul>
    </div>`;
-  }
+    }
 
-  const card = new LoopingCard(
-   "div",
-   {
-    id: `post-id-${id}`,
-    class: "card container-fluid d-flex justify-content-center gap-3 p-0",
-    "data-id": "postItem",
-   },
-   `<div class="card-header">
+    const card = new LoopingCard(
+      "div",
+      {
+        id: `post-id-${id}`,
+        class: "card container-fluid d-flex justify-content-center gap-3 p-0",
+        "data-id": "postItem",
+      },
+      `<div class="card-header">
        <div class="d-flex flex-fill">
         <div class="d-flex flex-fill gap-2 align-items-center">
          ${userAvatar}
@@ -150,11 +151,11 @@ function createPostFeed(postData) {
      </div>
     </div>
          `
-  );
-  // Removing loader
-  const loader = document.querySelector(".loader");
-  loader.style = "display: none;";
-  
-  feedContainer.append(card);
- });
+    );
+    // Removing loader
+    const loader = document.querySelector(".loader");
+    loader.style = "display: none;";
+
+    feedContainer.append(card);
+  });
 }

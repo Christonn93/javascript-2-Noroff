@@ -11,26 +11,26 @@ const fetchUrl = url + endpointPosts;
 
 // Creating function to display user profile
 export async function displayProfile() {
- const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
- const authUser = await fetchApi(fetchUrl, "GET", token, null);
- getUserPosts(authUser);
+  const authUser = await fetchApi(fetchUrl, "GET", token, null);
+  getUserPosts(authUser);
 }
 
 const userInfoContainer = document.getElementById("userInfo");
 if (userInfoContainer) {
- async function displayUserInformation() {
-  try {
-   const userInfo = await fetchApi(url + apiVar.getProfile + localStorage.getItem("username"), "GET", localStorage.getItem("token"), null);
+  async function displayUserInformation() {
+    try {
+      const userInfo = await fetchApi(url + apiVar.getProfile + localStorage.getItem("username"), "GET", localStorage.getItem("token"), null);
 
-   const { name, avatar, banner, _count } = userInfo;
-   const profileCard = new LoopingCard(
-    "div",
-    {
-     id: `profileCard`,
-     class: "container-fluid d-flex justify-content-center",
-    },
-    `<div class="card">
+      const { name, avatar, banner, _count } = userInfo;
+      const profileCard = new LoopingCard(
+        "div",
+        {
+          id: `profileCard`,
+          class: "container-fluid d-flex justify-content-center",
+        },
+        `<div class="card">
     <div class="card-body">
       <img src="${avatar}" class="image"/>
       <h4 class="card-title">${name}</h4>
@@ -43,12 +43,12 @@ if (userInfoContainer) {
       </div>
      </div>
      </div>`
-   );
+      );
 
-   userInfoContainer.append(profileCard);
-  } catch (error) {
-   console.log(error);
+      userInfoContainer.append(profileCard);
+    } catch (error) {
+      console.log(error);
+    }
   }
- }
- displayUserInformation();
+  displayUserInformation();
 }
