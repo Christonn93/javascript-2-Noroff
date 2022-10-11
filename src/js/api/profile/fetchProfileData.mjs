@@ -15,10 +15,8 @@ const endpointProfile = apiVar.profile;
  * If it is successful it authenticate the user by token. 
  * If it ends up with a error, the user will get a message, and it will show in the error in the console whit "console.error(error)"
  * 
- * @param {*} url This is the base url for the API. This is automatic added based on API variable
- * @param {*} endpointProfile This is a variable from the API variable. It is based on the endpoint to the profile in the API
- * @param {*} name The name is retrieved from localStorage and is needed to execute the function. Without this the script will not execute
- * @param {*} token The token is retrieved from localStorage and is needed to execute the function. Without this the script will not execute
+ * @param {string} name The name is retrieved from localStorage and is needed to execute the function. Without this the script will not execute
+ * @param {string} token The token is retrieved from localStorage and is needed to execute the function. Without this the script will not execute
  */
 export async function fetchData(token, name) {
  try {
