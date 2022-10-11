@@ -2,7 +2,7 @@ import * as apiVar from "../../constant/variables.mjs";
 import { fetchApi } from "../../constant/fetch.mjs";
 import { message } from "../../constant/message.mjs";
 
-let id = "";
+const id = "";
 
 // Re-declaring variables from import
 const url = apiVar.baseURL;
@@ -10,21 +10,21 @@ const postDetails = apiVar.getPostsById + id;
 const deletePost = apiVar.deletePost;
 
 export function deletePostListener(id) {
- document.querySelector(`button[id=deletePost-${id}]`).addEventListener("click", (e) => {
-  displayAlert(id);
- });
+   document.querySelector(`button[id=deletePost-${id}]`).addEventListener("click", (e) => {
+      displayAlert(id);
+   });
 }
 
 async function displayAlert(postId) {
- try {
-  const request = await fetchApi(url + postDetails + postId, "GET", localStorage.getItem("token"), null);
-  const { title, id } = request;
+   try {
+      const request = await fetchApi(url + postDetails + postId, "GET", localStorage.getItem("token"), null);
+      const { title, id } = request;
 
-  const main = document.querySelector("#confirm-action");
+      const main = document.querySelector("#confirm-action");
 
-  const displayContent = document.createElement("div");
-  displayContent.id = "actionForm";
-  displayContent.innerHTML = `<form class="container-fluid d-flex gap-5 mt-5 mb-5 justify-content-center" id="deletePost-${id}">
+      const displayContent = document.createElement("div");
+      displayContent.id = "actionForm";
+      displayContent.innerHTML = `<form class="container-fluid d-flex gap-5 mt-5 mb-5 justify-content-center" id="deletePost-${id}">
   <div class="d-flex flex-column card p-5">
    <div class="d-flex flex-column">
       <h4 class="align-self-center">Delete post</h4>
@@ -37,40 +37,40 @@ async function displayAlert(postId) {
   </div>
  </form>`;
 
-  main.append(displayContent);
+      main.append(displayContent);
 
-  if (displayContent) {
-   eventListener(id);
-  }
- } catch (error) {
-  console.log(error);
- }
+      if (displayContent) {
+         eventListener(id);
+      }
+   } catch (error) {
+      console.log(error);
+   }
 }
 
 function eventListener(id) {
- const form = document.querySelector(`#deletePost-${id}`);
- const accept = document.querySelector("#accept");
- const reject = document.querySelector("#reject");
- const formContainer = document.querySelector("#actionForm");
+   const form = document.querySelector(`#deletePost-${id}`);
+   const accept = document.querySelector("#accept");
+   const reject = document.querySelector("#reject");
+   const formContainer = document.querySelector("#actionForm");
 
- if (form) {
-  accept.addEventListener("click", (event) => {
-   event.preventDefault();
-   // send it to API
-   removePost(id);
-  });
+   if (form) {
+      accept.addEventListener("click", (event) => {
+         event.preventDefault();
+         // send it to API
+         removePost(id);
+      });
 
-  reject.addEventListener("click", (action) => {
-   formContainer.remove();
-  });
- }
+      reject.addEventListener("click", (action) => {
+         formContainer.remove();
+      });
+   }
 }
 
 async function removePost(id) {
- try {
-  const request = await fetchApi(url + deletePost + id, "DELETE", localStorage.getItem("token"), null);
-  window.location.reload();
- } catch (error) {
-  message("Error");
- }
+   try {
+      const request = await fetchApi(url + deletePost + id, "DELETE", localStorage.getItem("token"), null);
+      window.location.reload();
+   } catch (error) {
+      message("Error");
+   }
 }
