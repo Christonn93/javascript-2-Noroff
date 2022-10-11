@@ -11,7 +11,7 @@ import { logOut } from "./api/auth/logout.mjs";
 import { postFeed } from "./api/posts/postFeed.mjs";
 import { createPostListener } from "./api/posts/createPost.mjs";
 import { userSearch } from "./api/posts/functions/search.mjs";
-import { waitForData } from "./api/posts/comments.mjs";
+import { setCommentButtonListener } from "./api/posts/comments.mjs";
 import { postItemByID } from "./api/posts/postItemByID.mjs";
 
 // Importing layout
@@ -63,7 +63,7 @@ async function router() {
   case "postItemByID":
    postItemByID();
    generateFooter();
-   waitForData();
+   setCommentButtonListener();
    document.querySelector("title").innerText = defaultTitle + ` || Post`;
    break;
 
