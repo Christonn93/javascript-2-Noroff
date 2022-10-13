@@ -70,3 +70,4 @@ if (userInfoContainer) {
   }
   displayUserInformation();
 }
+
