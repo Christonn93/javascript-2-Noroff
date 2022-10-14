@@ -51,6 +51,7 @@ if (userInfoContainer) {
            <li class="list-group-item">Posts: ${_count.posts}</li>
            <li class="list-group-item">Followers: ${_count.followers}</li>
            <li class="list-group-item">Following: ${_count.following}</li>
+           <button type="button" class="btn btn-outline-theme text-black">Follow</button>
           </ul>
         </div>
        </div>
