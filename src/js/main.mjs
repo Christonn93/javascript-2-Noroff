@@ -56,10 +56,10 @@ async function router() {
 
     // Executing the the function for the feed page
     case "allPosts":
+      displayPageLoader();
       postFeed();
       userSearch();
       filterButtonListener();
-      displayPageLoader();
       document.querySelector("title").innerText =
         defaultTitle + ` || Feed wall`;
       break;

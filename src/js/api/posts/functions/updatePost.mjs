@@ -50,7 +50,7 @@ async function displayAlert(postId) {
 
     let requestBody = response;
 
-    const updateForm = displayUpdatePostForm(title, body, tag);
+    const updateForm = displayUpdatePostForm(title, body, tag, media);
 
     main.append(updateForm);
     formListener(id);
@@ -88,7 +88,7 @@ async function updatePost(id, content) {
   }
 }
 
-function displayUpdatePostForm(title, body, tag) {
+function displayUpdatePostForm(title, body, tag, media) {
   const displayContent = document.createElement("div");
   displayContent.innerHTML = `
 <form class="card bg-theme-bg-sec p-2 mb-5" id="updatePost">
@@ -101,6 +101,10 @@ function displayUpdatePostForm(title, body, tag) {
   <label class="form-label">New post</label>
   <textarea class="form-control" id="FormControlTextarea" rows="3" name="body">${body}</textarea>
  </div>
+ <div class="mb-3">
+ <label for="post_tags" class="form-label">Image</label>
+ <input type="text" class="form-control" id="post_image" placeholder="Enter url" name="media" value="${media}" data-id="post_media" />
+</div>
  <div class="mb-3">
   <label for="post_tags" class="form-label">Tags</label>
   <input type="text" class="form-control" id="post_tags" placeholder="Tags" value="${tag}" name="tag"/>

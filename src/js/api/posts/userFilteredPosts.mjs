@@ -1,5 +1,3 @@
-import { LoopingCard } from "../../utils/classes/cardClass.mjs";
-import { changeTimeFormat } from "../../utils/changeTime.mjs";
 import { deletePostListener } from "./functions/deletePost.mjs";
 import { updatePostListener } from "./functions/updatePost.mjs";
 import { retrievingPostData } from "./feed.mjs";

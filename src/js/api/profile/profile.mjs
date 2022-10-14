@@ -12,6 +12,7 @@ const fetchUrl = url + endpointPosts;
 // Creating function to display user profile
 export async function displayProfile() {
   const token = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
 
   const authUser = await fetchApi(fetchUrl, "GET", token, null);
   getUserPosts(authUser);
@@ -28,7 +29,7 @@ if (userInfoContainer) {
         null
       );
 
-      const { name, avatar, _count } = userInfo;
+      const { name, avatar, _count: numbers } = userInfo;
 
       // Card class related variables
 
@@ -48,10 +49,9 @@ if (userInfoContainer) {
         <h4 class="card-title">${name}</h4>
         <div class="">
         <ul class="list-group">
-           <li class="list-group-item">Posts: ${_count.posts}</li>
-           <li class="list-group-item">Followers: ${_count.followers}</li>
-           <li class="list-group-item">Following: ${_count.following}</li>
-           <button type="button" class="btn btn-outline-theme text-black">Follow</button>
+           <li class="list-group-item">Posts: ${numbers.posts}</li>
+           <li class="list-group-item">Followers: ${numbers.followers}</li>
+           <li class="list-group-item">Following: ${numbers.following}</li>
           </ul>
         </div>
        </div>

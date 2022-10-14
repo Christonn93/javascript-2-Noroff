@@ -1,5 +1,6 @@
 import { retrievingPostData } from "./feed.mjs";
 import { createPostFeed } from "./postFeed.mjs";
+import { displayIfNoPosts } from "../../constant/noPostDisplay.js";
 
 const postArray = await retrievingPostData();
 
@@ -11,6 +12,13 @@ export async function getUserPosts() {
     const dataFilter = data.filter(function (resp) {
       return resp.authorEmail === localStorage.getItem("email");
     });
-    createPostFeed(dataFilter);
+
+    if (dataFilter) {
+      createPostFeed(dataFilter);
+    }
+
+    if (dataFilter.length == 0) {
+      displayIfNoPosts();
+    }
   }
 }

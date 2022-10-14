@@ -5,6 +5,7 @@ import {
   cardElement,
 } from "../../utils/classes/cardClass.mjs";
 import { retrievingPostData } from "./feed.mjs";
+import { displayIfNoPosts } from "../../constant/noPostDisplay.js";
 
 import { deletePostListener } from "./functions/deletePost.mjs";
 import { updatePostListener } from "./functions/updatePost.mjs";
@@ -15,10 +16,13 @@ const postArray = await retrievingPostData();
  * This Function is simply retrieving the post arrays
  */
 export async function postFeed() {
+  let request = postArray;
   try {
-    let request = postArray;
-    createPostFeed(request);
+    if (postArray) {
+      createPostFeed(request);
+    }
   } catch (err) {
+    displayIfNoPosts();
     console.log("There was a problem retrieving the user posts", err);
   }
 }
@@ -35,26 +39,23 @@ export function createPostFeed(postArray) {
     const {
       id,
       title,
-      created,
       body,
       authorName,
       authorAvatar,
       posted,
       updated,
-      tag,
       postImage,
-      avatar,
       commNum,
-      comments,
+      com,
       reactNum,
       react,
-      count,
     } = data;
 
     // Constants for DOM manipulations
     let userAvatar = "";
     let postContentImage = "";
     let postSettings = "";
+    let commentsHtml;
 
     // Looking for author.name in the api fetch. Displaying settings wheel if the return value is true
     const currentUser = localStorage.getItem("username");
@@ -86,12 +87,12 @@ export function createPostFeed(postArray) {
       postImage,
       authorAvatar,
       postContentImage,
-      created,
+      posted,
       updated,
-      react,
       reactNum,
       commNum,
-      comments
+      com,
+      commentsHtml
     );
 
     // Creating a new card based on variables defined over.
