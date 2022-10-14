@@ -2,7 +2,7 @@
 import * as apiVar from "../../constant/variables.mjs";
 import { fetchApi } from "../../constant/fetch.mjs";
 import { LoopingCard } from "../../utils/classes/cardClass.mjs";
-import { getUserPosts } from "../posts/userFilteredPosts.mjs";
+import { getUserPosts } from "../posts/userFeed.mjs";
 
 // Re-declaring variables from import
 const url = apiVar.baseURL;

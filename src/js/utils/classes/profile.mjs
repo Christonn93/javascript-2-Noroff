@@ -11,3 +11,10 @@ class Profile {
     this.banner = banner || "/assets/img/banner-placeholder.png";
   }
 }
+
+const userProfile = new Profile({
+  name: localStorage.getItem("username"),
+  email: localStorage.getItem("email"),
+  avatar: localStorage.getItem("avatar"),
+  banner: localStorage.getItem("banner"),
+});

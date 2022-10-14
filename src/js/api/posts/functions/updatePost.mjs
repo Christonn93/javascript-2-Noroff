@@ -1,6 +1,12 @@
-import * as apiVar from "../../constant/variables.mjs";
-import { fetchApi } from "../../constant/fetch.mjs";
-import { message } from "../../constant/message.mjs";
+import * as apiVar from "../../../constant/variables.mjs";
+import { fetchApi } from "../../../constant/fetch.mjs";
+import { message } from "../../../constant/message.mjs";
+import { retrievingPostData } from "../feed.mjs";
+const postArray = await retrievingPostData();
+
+if (postArray) {
+  const { postID } = postArray;
+}
 
 let id = "";
 
@@ -9,11 +15,11 @@ const url = apiVar.baseURL;
 const postDetails = apiVar.getPostsById + id;
 const updatePostUrl = apiVar.deletePost + id;
 
-export function updatePostListener(id) {
+export function updatePostListener(postID) {
   document
-    .querySelector(`button[id=updatePost-${id}]`)
+    .querySelector(`#updatePost-id-${postID}`)
     .addEventListener("click", (e) => {
-      displayAlert(id);
+      displayAlert(postID);
     });
 }
 
@@ -44,26 +50,9 @@ async function displayAlert(postId) {
 
     let requestBody = response;
 
-    displayContent.innerHTML = `
-  <form class="card bg-theme-bg-sec p-2 mb-5" id="updatePost">
-  <div class="container">
-   <div class="mb-3">
-    <label for="post_title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="post_title" placeholder="Title" value="${title}" name="title"/>
-   </div>
-   <div class="mb-3">
-    <label class="form-label">New post</label>
-    <textarea class="form-control" id="FormControlTextarea" rows="3" name="body">${body}</textarea>
-   </div>
-   <div class="mb-3">
-    <label for="post_tags" class="form-label">Tags</label>
-    <input type="text" class="form-control" id="post_tags" placeholder="Tags" value="${tag}" name="tag"/>
-   </div>
-   <button type="submit" class="btn btn-theme-btn" id="formButton">Update post</button>
-  </div>
- </form>`;
+    const updateForm = displayUpdatePostForm(title, body, tag);
 
-    main.append(displayContent);
+    main.append(updateForm);
     formListener(id);
   } catch (error) {
     console.log(error);
@@ -97,4 +86,28 @@ async function updatePost(id, content) {
   } catch (error) {
     message("Error");
   }
+}
+
+function displayUpdatePostForm(title, body, tag) {
+  const displayContent = document.createElement("div");
+  displayContent.innerHTML = `
+<form class="card bg-theme-bg-sec p-2 mb-5" id="updatePost">
+<div class="container">
+ <div class="mb-3">
+  <label for="post_title" class="form-label">Title</label>
+  <input type="text" class="form-control" id="post_title" placeholder="Title" value="${title}" name="title"/>
+ </div>
+ <div class="mb-3">
+  <label class="form-label">New post</label>
+  <textarea class="form-control" id="FormControlTextarea" rows="3" name="body">${body}</textarea>
+ </div>
+ <div class="mb-3">
+  <label for="post_tags" class="form-label">Tags</label>
+  <input type="text" class="form-control" id="post_tags" placeholder="Tags" value="${tag}" name="tag"/>
+ </div>
+ <button type="submit" class="btn btn-theme-btn" id="formButton">Update post</button>
+</div>
+</form>`;
+
+  return displayContent;
 }
