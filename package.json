@@ -1,0 +1,24 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "sass src/scss:dist/css",
+    "watch": "sass --watch src/scss:dist/css & live-server",
+    "prettier-watch": "onchange \"**/*.mjs\" -- prettier --write {{changed}}"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.0",
+    "onchange": "^7.1.0"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.11",
+    "live-server": "^1.2.2",
+    "prettier": "2.7.1",
+    "sass": "^1.55.0"
+  }
+}

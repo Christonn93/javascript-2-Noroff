@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <!-- Meta -->
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="author" content="Christopher Tønnesland & Joakim Vanebo" />
+
+  <!-- Style -->
+  <link rel="stylesheet" href="./dist/css/main.css" />
+
+  <!-- Font awesome -->
+  <script src="https://kit.fontawesome.com/af67014470.js" crossorigin="anonymous"></script>
+
+  <title></title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+ </head>
+ <body class="d-flex flex-column vh-100" id="testing">
+  <header class="sticky-top bg-theme-bg-sec">
+   <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid flex-column flex-lg-row">
+     <div class="d-flex justify-content-between me-5 mt-4 mt-lg-0 w-100">
+      <a class="navbar-brand text-theme" href="/"><img src="../../../src/scss/custom/svg/camera.svg" width="50px" class="me-2" />The social universe</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+     </div>
+     <div class="col-12 col-lg flex-lg-grow-0 me-5 mt-4 mt-lg-0">
+      <div class="collapse navbar-collapse" id="navbar">
+       <ul class="navbar-nav">
+        <li class="nav-item">
+         <a class="nav-link" href="../profile/index.html">Profile</a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link" href="../feed/index.html">Posts</a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link" href="#" name="logout" id="logout">logout</a>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </nav>
+  </header>
+  <main class="flex-grow-1">
+   <div class="d-flex justify-content-evenly">
+    <div id="filterContainer">
+     <button class="btn" name="date" value="oldNew">Date old/new</button>
+     <button class="btn" name="like" value="lowHigh">Ratings low/high</button>
+     <button class="btn" name="like" value="highLow">Ratings high/low</button>
+    </div>
+   </div>
+  </main>
+
+  <footer class="bg-theme-bg-sec"></footer>
+  <!-- Scripts -->
+  <script src="./src/js/main.mjs" type="module" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+ </body>
+</html>
