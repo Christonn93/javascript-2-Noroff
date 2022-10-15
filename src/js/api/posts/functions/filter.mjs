@@ -24,16 +24,15 @@ export function filterButtonListener() {
  * @param {*} value This is sett by switch case
  * @returns sorted or default array. Depending on witch button that is clicked.
  */
+
+ const defaultArray = [...postArray];
+
 function filteringData(value) {
   // Fetching the data
-  const defaultArray = postArray;
+
   let sortedArray = [];
 
   switch (value) {
-    default:
-      defaultArray;
-      break;
-
     case "sort_date":
       sortedArray = postArray.sort(sortByDate);
       break;
@@ -47,8 +46,12 @@ function filteringData(value) {
       break;
 
     case "all":
-      sortedArray = postArray;
+      sortedArray = defaultArray;
       break;
+
+      default:
+        sortedArray = defaultArray;
+        break;
   }
 
   return sortedArray;
@@ -65,24 +68,6 @@ function sortByDate(a, b) {
   return new Date(a.posted) < new Date(b.posted);
 }
 
-/**
- * Simple sorting function
- *
- * @param {*} a
- * @param {*} b
- * @returns filtered array
- */
-function sortByAtoZ(a, b) {
-  return a.authorName > b.authorName;
-}
+ const sortByAtoZ = (a, b) => a.authorName.localeCompare(b.authorName);
 
-/**
- * Simple sorting function
- *
- * @param {*} a
- * @param {*} b
- * @returns filtered array
- */
-function sortByZtoA(a, b) {
-  return a.authorName < b.authorName;
-}
+ const sortByZtoA = (a, b) => b.authorName.localeCompare(a.authorName);
