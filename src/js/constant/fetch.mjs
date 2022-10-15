@@ -45,8 +45,8 @@ export async function fetchApi(url, method, token, data) {
     // Sending the request to the API
     const request = await fetch(url, fetchOptions);
     const response = await request.json();
+    
     // Doing this if the response comes back with a with a Access token
-
     if (response.accessToken) {
       // Creating a shorter const for saving in local storage
       const i = response;

@@ -6,7 +6,7 @@ import {
   cardAttributes,
   cardElement,
 } from "../../utils/classes/cardClass.mjs";
-import { retrievingPostData } from "./feed.mjs";
+import { translatePostModel } from "./feed.mjs";
 // Retrieving items from storage
 const token = localStorage.getItem("token");
 
@@ -25,10 +25,9 @@ const fetchUrl = url + endpointPosts + `${paramId}`;
 export async function postItemByID() {
   try {
     const request = await fetchApi(fetchUrl, "GET", token, null);
+    const destructureArray = translatePostModel(request)
 
-    if (id === postId) {
-      const postArray = await retrievingPostData();
-      const {
+    const {
         id,
         title,
         created,
@@ -41,22 +40,24 @@ export async function postItemByID() {
         postImage,
         avatar,
         commNum,
-        comments,
+        com,
         reactNum,
         react,
         count,
-      } = postArray;
+      } = destructureArray;
+
       // Constants for DOM manipulations
-      let userAvatar = "";
-      let postContentImage = "";
-      let postSettings = "";
+      let userAvatar;
+      let postContentImage;
+      let postSettings;
+      let commentsHtml;
 
       const feedContainer = document.querySelector("#post-feed");
       // Choosing what type of HTML element to render
       const classElement = cardElement();
 
       // Adding attributes to the HTML element
-      const classAttributes = cardAttributes(id);
+      const classAttributes = cardAttributes(postId);
 
       // Laying out the HTMl to render for each card
       const classTemplate = cardTemplate(
@@ -69,12 +70,12 @@ export async function postItemByID() {
         postImage,
         authorAvatar,
         postContentImage,
-        created,
+        posted,
         updated,
-        react,
         reactNum,
         commNum,
-        comments
+        com,
+        commentsHtml
       );
 
       // Creating a new card based on variables defined over.
@@ -89,7 +90,6 @@ export async function postItemByID() {
       loader.style = "display: none;";
 
       feedContainer.append(card);
-    }
   } catch (err) {
     console.log("There was a problem retrieving the user posts", err);
   }

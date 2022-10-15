@@ -50,8 +50,10 @@ async function postFeedMap() {
 }
 
 export async function retrievingPostData() {
-  if (localStorage.getItem("token")) {
-    let posts = await postFeedMap();
-    return posts;
+  if (!localStorage.getItem("token")) {
+  return null;
   }
+  
+  let posts = await postFeedMap();
+  return posts;
 }
