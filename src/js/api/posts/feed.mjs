@@ -41,9 +41,11 @@ async function postFeedMap() {
       null
     );
 
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("token") && Array.isArray(response)) {
       return response.map(translatePostModel);
     }
+
+    throw new Error("Either no token was supplied or the response was not an array...")
   } catch (err) {
     console.log("There was a problem retrieving the user posts", err);
   }
