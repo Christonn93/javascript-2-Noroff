@@ -20,12 +20,12 @@ export const fetchParams = {
 };
 
 // Base url for the api
-export const baseURL = `https://nf-api.onrender.com/api/v1`;
+export const baseURL = `http://localhost:1334/api/v1`;
 
 // Endpoint for registrations and login
 export const login = `/social/auth/login`;
 export const register = `/social/auth/register`;
-export const API_SOCIAL_URL = `https://nf-api.onrender.com/api/v1/social`;
+export const API_SOCIAL_URL = `http://localhost:1334/api/v1/social`;
 
 // Endpoint for everything related to profile
 export const profile = `/social/profiles/`;

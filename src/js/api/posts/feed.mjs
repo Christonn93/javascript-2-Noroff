@@ -51,7 +51,7 @@ async function postFeedMap() {
 
 export async function retrievingPostData() {
   if (!localStorage.getItem("token")) {
-  return null;
+  return [];
   }
   
   let posts = await postFeedMap();

@@ -25,7 +25,7 @@ export function filterButtonListener() {
  * @returns sorted or default array. Depending on witch button that is clicked.
  */
 
- const defaultArray = [...postArray];
+ const defaultArray = Array.from(postArray || []);
 
 function filteringData(value) {
   // Fetching the data
